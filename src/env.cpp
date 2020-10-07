@@ -7,7 +7,7 @@ Env::Env(Context &context) : Processor(context) {}
 /* Lots of people struggle with the envelope generators so here's a new easy
  one. It takes mental numbers for attack and release tho. Basically, they're
  exponentials. I'll map them out later so that it's a bit more intuitive */
-double Env::ar(double input, double attack, double release, long holdtime,
+float Env::ar(float input, float attack, float release, long holdtime,
                int trigger) {
 
   if (trigger == 1 && attackphase != 1 && holdphase != 1) {
@@ -50,8 +50,8 @@ double Env::ar(double input, double attack, double release, long holdtime,
 
 /* adsr. It's not bad, very simple to use*/
 
-double Env::adsr(double input, double attack, double decay, double sustain,
-                 double release, long holdtime, int trigger) {
+float Env::adsr(float input, float attack, float decay, float sustain,
+                 float release, long holdtime, int trigger) {
 
   if (trigger == 1 && attackphase != 1 && holdphase != 1 && decayphase != 1) {
     holdcount = 0;

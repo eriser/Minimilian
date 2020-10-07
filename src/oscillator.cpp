@@ -4,7 +4,7 @@
 namespace maximilian {
 
 // this is a 514-point sinewave table that has many uses.
-const double sineBuffer[514] = {
+const float sineBuffer[514] = {
     0,         0.012268,  0.024536,  0.036804,  0.049042,  0.06131,   0.073547,
     0.085785,  0.097992,  0.1102,    0.12241,   0.13455,   0.1467,    0.15884,
     0.17093,   0.18301,   0.19507,   0.20709,   0.21909,   0.23105,   0.24295,
@@ -81,7 +81,7 @@ const double sineBuffer[514] = {
     -0.012268, 0,         0.012268};
 
 // This is a transition table that helps with bandlimited oscs.
-const double transition[1001] = {
+const float transition[1001] = {
     -0.500003,   -0.500003,   -0.500023,   -0.500063,  -0.500121,  -0.500179,
     -0.500259,   -0.50036,    -0.500476,   -0.500591,  -0.500732,  -0.500893,
     -0.501066,   -0.501239,   -0.50144,    -0.501661,  -0.501891,  -0.502123,
@@ -252,7 +252,7 @@ const double transition[1001] = {
 
 Oscillator::Oscillator(Context &context) : Processor(context), phase(0.0) {}
 
-double Oscillator::noise() {
+float Oscillator::noise() {
   // White Noise
   // always the same unless you seed it.
   float r = std::rand() / (float)RAND_MAX;
@@ -260,12 +260,12 @@ double Oscillator::noise() {
   return (output);
 }
 
-void Oscillator::phaseReset(double phaseIn) {
+void Oscillator::phaseReset(float phaseIn) {
   // This allows you to set the phase of the oscillator to anything you like.
   phase = phaseIn;
 }
 
-double Oscillator::sinewave(double frequency) {
+float Oscillator::sinewave(float frequency) {
   // This is a sinewave oscillator
   output = sin(phase * (TWOPI));
   if (phase >= 1.0)
@@ -274,11 +274,11 @@ double Oscillator::sinewave(double frequency) {
   return (output);
 }
 
-double Oscillator::sinebuf4(double frequency) {
+float Oscillator::sinebuf4(float frequency) {
   // This is a sinewave oscillator that uses 4 point interpolation on a 514
   // point buffer
-  double remainder;
-  double a, b, c, d, a1, a2, a3;
+  float remainder;
+  float a, b, c, d, a1, a2, a3;
   phase += 512. / (context.sampleRate / (frequency));
   if (phase >= 511)
     phase -= 512;
@@ -300,25 +300,25 @@ double Oscillator::sinebuf4(double frequency) {
   a1 = 0.5f * (c - a);
   a2 = a - 2.5 * b + 2.f * c - 0.5f * d;
   a3 = 0.5f * (d - a) + 1.5f * (b - c);
-  output = double(((a3 * remainder + a2) * remainder + a1) * remainder + b);
+  output = float(((a3 * remainder + a2) * remainder + a1) * remainder + b);
   return (output);
 }
 
-double Oscillator::sinebuf(double frequency) { // specify the frequency of the
+float Oscillator::sinebuf(float frequency) { // specify the frequency of the
                                                // oscillator in Hz / cps etc.
   // This is a sinewave oscillator that uses linear interpolation on a 514 point
   // buffer
-  double remainder;
+  float remainder;
   phase += 512. / (context.sampleRate / (frequency));
   if (phase >= 511)
     phase -= 512;
   remainder = phase - floor(phase);
-  output = (double)((1 - remainder) * sineBuffer[1 + (long)phase] +
+  output = (float)((1 - remainder) * sineBuffer[1 + (long)phase] +
                     remainder * sineBuffer[2 + (long)phase]);
   return (output);
 }
 
-double Oscillator::coswave(double frequency) {
+float Oscillator::coswave(float frequency) {
   // This is a cosine oscillator
   output = cos(phase * (TWOPI));
   if (phase >= 1.0)
@@ -327,7 +327,7 @@ double Oscillator::coswave(double frequency) {
   return (output);
 }
 
-double Oscillator::phasor(double frequency) {
+float Oscillator::phasor(float frequency) {
   // This produces a floating point linear ramp between 0 and 1 at the desired
   // frequency
   output = phase;
@@ -337,7 +337,7 @@ double Oscillator::phasor(double frequency) {
   return (output);
 }
 
-double Oscillator::square(double frequency) {
+float Oscillator::square(float frequency) {
   // This is a square wave
   if (phase < 0.5)
     output = -1;
@@ -349,7 +349,7 @@ double Oscillator::square(double frequency) {
   return (output);
 }
 
-double Oscillator::pulse(double frequency, double duty) {
+float Oscillator::pulse(float frequency, float duty) {
   // This is a pulse generator that creates a signal between -1 and 1.
   if (duty < 0.)
     duty = 0;
@@ -365,8 +365,8 @@ double Oscillator::pulse(double frequency, double duty) {
   return (output);
 }
 
-double Oscillator::phasor(double frequency, double startphase,
-                          double endphase) {
+float Oscillator::phasor(float frequency, float startphase,
+                          float endphase) {
   // This is a phasor that takes a value for the start and end of the ramp.
   output = phase;
   if (phase < startphase) {
@@ -379,7 +379,7 @@ double Oscillator::phasor(double frequency, double startphase,
   return (output);
 }
 
-double Oscillator::saw(double frequency) {
+float Oscillator::saw(float frequency) {
   // Sawtooth generator. This is like a phasor but goes between -1 and 1
   output = phase;
   if (phase >= 1.0)
@@ -388,12 +388,12 @@ double Oscillator::saw(double frequency) {
   return (output);
 }
 
-double Oscillator::sawn(double frequency) {
+float Oscillator::sawn(float frequency) {
   // Bandlimited sawtooth generator. Woohoo.
   if (phase >= 0.5)
     phase -= 1.0;
   phase += (1. / (context.sampleRate / frequency));
-  double temp = (8820.22 / frequency) * phase;
+  float temp = (8820.22 / frequency) * phase;
   if (temp < -0.5) {
     temp = -0.5;
   }
@@ -402,16 +402,16 @@ double Oscillator::sawn(double frequency) {
   }
   temp *= 1000.0f;
   temp += 500.0f;
-  double remainder = temp - floor(temp);
-  output = (double)((1.0f - remainder) * transition[(long)temp] +
+  float remainder = temp - floor(temp);
+  output = (float)((1.0f - remainder) * transition[(long)temp] +
                     remainder * transition[1 + (long)temp]) -
            phase;
   return (output);
 }
 
-double Oscillator::rect(double frequency, double duty) { return (output); }
+float Oscillator::rect(float frequency, float duty) { return (output); }
 
-double Oscillator::triangle(double frequency) {
+float Oscillator::triangle(float frequency) {
   // This is a triangle wave.
   if (phase >= 1.0)
     phase -= 1.0;

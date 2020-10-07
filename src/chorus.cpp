@@ -11,9 +11,9 @@ Chorus::Chorus(Context &context)
 // feedback = 0 - 1
 // speed = lfo speed in Hz, 0.0001 - 10 sounds good
 // depth = 0 - 1
-double Chorus::process(double input, unsigned int delay,
-                      double feedback, double speed,
-                      double depth) {
+float Chorus::process(float input, unsigned int delay,
+                      float feedback, float speed,
+                      float depth) {
   auto lfoVal = lopass.lores(lfo.noise(), speed, 1.0) * 2.0;
   auto output1 = dl.process(input, delay + (lfoVal * depth * delay) + 1, feedback);
   auto output2 =

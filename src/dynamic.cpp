@@ -11,8 +11,8 @@ namespace maximilian {
 
 Dynamic::Dynamic(Context &context) : Processor(context) {}
 
-double Dynamic::gate(double input, double threshold, long holdtime,
-                     double attack, double release) {
+float Dynamic::gate(float input, float threshold, long holdtime,
+                     float attack, float release) {
 
   if (std::fabs(input) > threshold && attackphase != 1) {
     holdcount = 0;
@@ -49,8 +49,8 @@ double Dynamic::gate(double input, double threshold, long holdtime,
   return output;
 }
 
-double Dynamic::compressor(double input, double ratio, double threshold,
-                           double attack, double release) {
+float Dynamic::compressor(float input, float ratio, float threshold,
+                           float attack, float release) {
 
   if (std::fabs(input) > threshold && attackphase != 1) {
     holdcount = 0;

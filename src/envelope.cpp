@@ -5,7 +5,7 @@ namespace maximilian {
 
 Envelope::Envelope(Context &context) : Processor(context) {}
 
-double Envelope::line(int numberofsegments, double segments[1000]) {
+float Envelope::line(int numberofsegments, float segments[1000]) {
   // This is a basic multi-segment ramp generator that you can use for more or
   // less anything.
   // However, it's not that intuitive.
@@ -36,7 +36,7 @@ double Envelope::line(int numberofsegments, double segments[1000]) {
 }
 
 // and this
-void Envelope::trigger(int index, double amp) {
+void Envelope::trigger(int index, float amp) {
   isPlaying = 1; // ok the envelope is being used now.
   valindex = index;
   amplitude = amp;

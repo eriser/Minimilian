@@ -3,8 +3,8 @@
 
 namespace maximilian {
 
-double fastatan(double x);
-double atanDist(double in, double shape);
-double fastAtanDist(double in, double shape);
+float fastatan(float x);
+float atanDist(float in, float shape);
+float fastAtanDist(float in, float shape);
 
 } // namespace maximilian

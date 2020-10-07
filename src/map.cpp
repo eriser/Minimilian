@@ -4,20 +4,20 @@
 
 namespace maximilian {
   
-double linlin(double val, double inMin, double inMax, double outMin,
-                     double outMax) {
+float linlin(float val, float inMin, float inMax, float outMin,
+                     float outMax) {
   return ((val - inMin) / (inMax - inMin) * (outMax - outMin)) + outMin;
 }
 
-double linexp(double val, double inMin, double inMax, double outMin,
-                     double outMax) {
+float linexp(float val, float inMin, float inMax, float outMin,
+                     float outMax) {
   // clipping
   val = std::max(std::min(val, inMax), inMin);
   return std::pow((outMax / outMin), (val - inMin) / (inMax - inMin)) * outMin;
 }
 
-double explin(double val, double inMin, double inMax, double outMin,
-                     double outMax) {
+float explin(float val, float inMin, float inMax, float outMin,
+                     float outMax) {
   // clipping
   val = std::max(std::min(val, inMax), inMin);
   return (std::log(val / inMin) / std::log(inMax / inMin) * (outMax - outMin)) +

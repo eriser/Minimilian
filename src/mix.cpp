@@ -6,7 +6,7 @@ namespace maximilian {
 Mix::Mix(Context &context) : Processor(context) {}
 
 // stereo bus
-double *Mix::stereo(double input, double two[2], double x) {
+float *Mix::stereo(float input, float two[2], float x) {
   if (x > 1)
     x = 1;
   if (x < 0)
@@ -17,7 +17,7 @@ double *Mix::stereo(double input, double two[2], double x) {
 }
 
 // quad bus
-double *Mix::quad(double input, double four[4], double x, double y) {
+float *Mix::quad(float input, float four[4], float x, float y) {
   if (x > 1)
     x = 1;
   if (x < 0)
@@ -34,8 +34,8 @@ double *Mix::quad(double input, double four[4], double x, double y) {
 }
 
 // ambisonic bus
-double *Mix::ambisonic(double input, double eight[8], double x, double y,
-                       double z) {
+float *Mix::ambisonic(float input, float eight[8], float x, float y,
+                       float z) {
   if (x > 1)
     x = 1;
   if (x < 0)

@@ -3,14 +3,11 @@
 
 namespace maximilian {
 
-double linlin(double val, double inMin, double inMax, double outMin,
-              double outMax);
+float linlin(float val, float inMin, float inMax, float outMin, float outMax);
 
-double linexp(double val, double inMin, double inMax, double outMin,
-              double outMax);
+float linexp(float val, float inMin, float inMax, float outMin, float outMax);
 
-double explin(double val, double inMin, double inMax, double outMin,
-              double outMax);
+float explin(float val, float inMin, float inMax, float outMin, float outMax);
 
 int clamp(int v, int low, int high);
 

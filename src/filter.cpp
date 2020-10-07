@@ -7,21 +7,21 @@ Filter::Filter(Context &context)
     : Processor(context), x(0.0), y(0.0), z(0.0), c(0.0){};
 
 // I particularly like these. cutoff between 0 and 1
-double Filter::lopass(double input, double cutoff) {
+float Filter::lopass(float input, float cutoff) {
   output = outputs[0] + cutoff * (input - outputs[0]);
   outputs[0] = output;
 
   return output;
 }
 // as above
-double Filter::hipass(double input, double cutoff) {
+float Filter::hipass(float input, float cutoff) {
   output = input - (outputs[0] + cutoff * (input - outputs[0]));
   outputs[0] = output;
 
   return output;
 }
 // awesome. cuttof is freq in hz. res is between 1 and whatever. Watch out!
-double Filter::lores(double input, double cutoff1, double resonance) {
+float Filter::lores(float input, float cutoff1, float resonance) {
   auto sampleRate = context.sampleRate;
 
   cutoff = cutoff1;
@@ -49,7 +49,7 @@ double Filter::lores(double input, double cutoff1, double resonance) {
 }
 
 // working hires filter
-double Filter::hires(double input, double cutoff1, double resonance) {
+float Filter::hires(float input, float cutoff1, float resonance) {
   auto sampleRate = context.sampleRate;
 
   cutoff = cutoff1;
@@ -78,7 +78,7 @@ double Filter::hires(double input, double cutoff1, double resonance) {
 }
 
 // This works a bit. Needs attention.
-double Filter::bandpass(double input, double cutoff1, double resonance) {
+float Filter::bandpass(float input, float cutoff1, float resonance) {
   auto sampleRate = context.sampleRate;
 
   cutoff = cutoff1;

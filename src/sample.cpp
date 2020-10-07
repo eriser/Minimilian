@@ -5,8 +5,8 @@
 
 namespace maximilian {
 
-void Sample::loopRecord(double newSample, bool recordEnabled,
-                        double recordMix) {
+void Sample::loopRecord(float newSample, bool recordEnabled,
+                        float recordMix) {
   loopRecordLag.addSample(recordEnabled);
   if (recordEnabled) {
     auto currentSample =
@@ -121,20 +121,20 @@ bool Sample::load(const char *fileName, int channel) {
 }
 
 // This plays back at the correct speed. Always loops.
-double Sample::play() {
+float Sample::play() {
   position++;
   if ((long)position == length)
     position = 0;
-  output = (double)temp[(long)position] / 32767.0;
+  output = (float)temp[(long)position] / 32767.0;
   return output;
 }
 
 // This plays back at the correct speed. Only plays once. To retrigger, you have
 // to manually reset the position
-double Sample::playOnce() {
+float Sample::playOnce() {
   position++;
   if ((long)position < length)
-    output = (double)temp[(long)position] / 32767.0;
+    output = (float)temp[(long)position] / 32767.0;
   else {
     output = 0;
   }
@@ -143,11 +143,11 @@ double Sample::playOnce() {
 
 // Same as above but takes a speed value specified as a ratio, with 1.0 as
 // original speed
-double Sample::playOnce(double speed) {
+float Sample::playOnce(float speed) {
   position = position + (speed / (context.sampleRate / mySampleRate));
-  double remainder = position - (long)position;
+  float remainder = position - (long)position;
   if ((long)position < length)
-    output = (double)((1 - remainder) * temp[1 + (long)position] +
+    output = (float)((1 - remainder) * temp[1 + (long)position] +
                       remainder * temp[2 + (long)position]) /
              32767; // linear interpolation
   else
@@ -156,8 +156,8 @@ double Sample::playOnce(double speed) {
 }
 
 // As above but looping
-double Sample::play(double speed) {
-  double remainder;
+float Sample::play(float speed) {
+  float remainder;
   long a, b;
   position = position + (speed / (context.sampleRate / mySampleRate));
   if (speed >= 0) {
@@ -177,7 +177,7 @@ double Sample::play(double speed) {
       b = length - 1;
     }
 
-    output = (double)((1 - remainder) * temp[a] + remainder * temp[b]) /
+    output = (float)((1 - remainder) * temp[a] + remainder * temp[b]) /
              32767; // linear interpolation
   } else {
     if ((long)position < 0)
@@ -194,21 +194,21 @@ double Sample::play(double speed) {
     } else {
       b = 0;
     }
-    output = (double)((-1 - remainder) * temp[a] + remainder * temp[b]) /
+    output = (float)((-1 - remainder) * temp[a] + remainder * temp[b]) /
              32767; // linear interpolation
   }
   return (output);
 }
 
 // placeholder
-double Sample::play(double frequency, double start, double end) {
+float Sample::play(float frequency, float start, float end) {
   return play(frequency, start, end, position);
 }
 
 // This allows you to say how often a second you want a specific chunk of audio
 // to play
-double Sample::play(double frequency, double start, double end, double &pos) {
-  double remainder;
+float Sample::play(float frequency, float start, float end, float &pos) {
+  float remainder;
   if (end >= length)
     end = length - 1;
   long a, b;
@@ -235,7 +235,7 @@ double Sample::play(double frequency, double start, double end, double &pos) {
       b = length - 1;
     }
 
-    output = (double)((1 - remainder) * temp[a] + remainder * temp[b]) /
+    output = (float)((1 - remainder) * temp[a] + remainder * temp[b]) /
              32767; // linear interpolation
   } else {
     frequency *= -1.;
@@ -254,7 +254,7 @@ double Sample::play(double frequency, double start, double end, double &pos) {
     } else {
       b = 0;
     }
-    output = (double)((-1 - remainder) * temp[a] + remainder * temp[b]) /
+    output = (float)((-1 - remainder) * temp[a] + remainder * temp[b]) /
              32767; // linear interpolation
   }
 
@@ -263,9 +263,9 @@ double Sample::play(double frequency, double start, double end, double &pos) {
 
 // Same as above. better cubic inerpolation. Cobbled together from various (pd
 // externals, yehar, other places).
-double Sample::play4(double frequency, double start, double end) {
-  double remainder;
-  double a, b, c, d, a1, a2, a3;
+float Sample::play4(float frequency, float start, float end) {
+  float remainder;
+  float a, b, c, d, a1, a2, a3;
   if (frequency > 0.) {
     if (position < start) {
       position = start;
@@ -298,7 +298,7 @@ double Sample::play4(double frequency, double start, double end) {
     a2 = a - 2.5 * b + 2.f * c - 0.5f * d;
     a3 = 0.5f * (d - a) + 1.5f * (b - c);
     output =
-        (double)(((a3 * remainder + a2) * remainder + a1) * remainder + b) /
+        (float)(((a3 * remainder + a2) * remainder + a1) * remainder + b) /
         32767;
 
   } else {
@@ -331,7 +331,7 @@ double Sample::play4(double frequency, double start, double end) {
     a2 = a - 2.5 * b + 2.f * c - 0.5f * d;
     a3 = 0.5f * (d - a) + 1.5f * (b - c);
     output =
-        (double)(((a3 * remainder + a2) * -remainder + a1) * -remainder + b) /
+        (float)(((a3 * remainder + a2) * -remainder + a1) * -remainder + b) /
         32767;
   }
 
@@ -339,21 +339,21 @@ double Sample::play4(double frequency, double start, double end) {
 }
 
 // You don't need to worry about this stuff.
-double Sample::bufferPlay(unsigned char &bufferin, long length) {
-  double remainder;
+float Sample::bufferPlay(unsigned char &bufferin, long length) {
+  float remainder;
   short *buffer = (short *)&bufferin;
   position = (position + 1);
   remainder = position - (long)position;
   if ((long)position > length)
     position = 0;
-  output = (double)((1 - remainder) * buffer[1 + (long)position] +
+  output = (float)((1 - remainder) * buffer[1 + (long)position] +
                     remainder * buffer[2 + (long)position]) /
            32767; // linear interpolation
   return (output);
 }
 
-double Sample::bufferPlay(unsigned char &bufferin, double speed, long length) {
-  double remainder;
+float Sample::bufferPlay(unsigned char &bufferin, float speed, long length) {
+  float remainder;
   long a, b;
   short *buffer = (short *)&bufferin;
   position = position + (speed / (context.sampleRate / mySampleRate));
@@ -374,7 +374,7 @@ double Sample::bufferPlay(unsigned char &bufferin, double speed, long length) {
       b = length - 1;
     }
 
-    output = (double)((1 - remainder) * buffer[a] + remainder * buffer[b]) /
+    output = (float)((1 - remainder) * buffer[a] + remainder * buffer[b]) /
              32767; // linear interpolation
   } else {
     if ((long)position < 0)
@@ -391,15 +391,15 @@ double Sample::bufferPlay(unsigned char &bufferin, double speed, long length) {
     } else {
       b = 0;
     }
-    output = (double)((-1 - remainder) * buffer[a] + remainder * buffer[b]) /
+    output = (float)((-1 - remainder) * buffer[a] + remainder * buffer[b]) /
              32767; // linear interpolation
   }
   return (output);
 }
 
-double Sample::bufferPlay(unsigned char &bufferin, double frequency,
-                          double start, double end) {
-  double remainder;
+float Sample::bufferPlay(unsigned char &bufferin, float frequency,
+                          float start, float end) {
+  float remainder;
   length = end;
   long a, b;
   short *buffer = (short *)&bufferin;
@@ -425,7 +425,7 @@ double Sample::bufferPlay(unsigned char &bufferin, double frequency,
       b = length - 1;
     }
 
-    output = (double)((1 - remainder) * buffer[a] + remainder * buffer[b]) /
+    output = (float)((1 - remainder) * buffer[a] + remainder * buffer[b]) /
              32767; // linear interpolation
   } else {
     frequency *= -1.;
@@ -444,7 +444,7 @@ double Sample::bufferPlay(unsigned char &bufferin, double frequency,
     } else {
       b = 0;
     }
-    output = (double)((-1 - remainder) * buffer[a] + remainder * buffer[b]) /
+    output = (float)((-1 - remainder) * buffer[a] + remainder * buffer[b]) /
              32767; // linear interpolation
   }
 
@@ -453,10 +453,10 @@ double Sample::bufferPlay(unsigned char &bufferin, double frequency,
 
 // better cubic inerpolation. Cobbled together from various (pd externals,
 // yehar, other places).
-double Sample::bufferPlay4(unsigned char &bufferin, double frequency,
-                           double start, double end) {
-  double remainder;
-  double a, b, c, d, a1, a2, a3;
+float Sample::bufferPlay4(unsigned char &bufferin, float frequency,
+                           float start, float end) {
+  float remainder;
+  float a, b, c, d, a1, a2, a3;
   short *buffer = (short *)&bufferin;
   if (frequency > 0.) {
     if (position < start) {
@@ -490,7 +490,7 @@ double Sample::bufferPlay4(unsigned char &bufferin, double frequency,
     a2 = a - 2.5 * b + 2.f * c - 0.5f * d;
     a3 = 0.5f * (d - a) + 1.5f * (b - c);
     output =
-        (double)(((a3 * remainder + a2) * remainder + a1) * remainder + b) /
+        (float)(((a3 * remainder + a2) * remainder + a1) * remainder + b) /
         32767;
 
   } else {
@@ -523,7 +523,7 @@ double Sample::bufferPlay4(unsigned char &bufferin, double frequency,
     a2 = a - 2.5 * b + 2.f * c - 0.5f * d;
     a3 = 0.5f * (d - a) + 1.5f * (b - c);
     output =
-        (double)(((a3 * remainder + a2) * -remainder + a1) * -remainder + b) /
+        (float)(((a3 * remainder + a2) * -remainder + a1) * -remainder + b) /
         32767;
   }
 

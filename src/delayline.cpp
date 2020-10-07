@@ -5,10 +5,10 @@ namespace maximilian {
 
 // Delay with feedback
 Delayline::Delayline(Context &context) : Processor(context) {
-  memset(memory, 0, 88200 * sizeof(double));
+  memset(memory, 0, 88200 * sizeof(float));
 }
 
-double Delayline::process(double input, int size, double feedback) {
+float Delayline::process(float input, int size, float feedback) {
   
   if (phase >= size) {
     phase = 0;
@@ -21,7 +21,7 @@ double Delayline::process(double input, int size, double feedback) {
   return output;
 }
 
-double Delayline::process(double input, int size, double feedback,
+float Delayline::process(float input, int size, float feedback,
                           int position) {
 
   if (phase >= size)

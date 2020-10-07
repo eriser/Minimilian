@@ -19,36 +19,36 @@ public:
 
   void trigger();
 
-  void loopRecord(double newSample, bool recordEnabled,
-                  double recordMix);
+  void loopRecord(float newSample, bool recordEnabled,
+                  float recordMix);
 
   void clear();
 
   void reset();
 
-  double play();
+  float play();
 
-  double playOnce();
+  float playOnce();
 
-  double playOnce(double speed);
+  float playOnce(float speed);
 
-  double play(double speed);
+  float play(float speed);
 
-  double play(double frequency, double start, double end, double &pos);
+  float play(float frequency, float start, float end, float &pos);
 
-  double play(double frequency, double start, double end);
+  float play(float frequency, float start, float end);
 
-  double play4(double frequency, double start, double end);
+  float play4(float frequency, float start, float end);
 
-  double bufferPlay(unsigned char &bufferin, long length);
+  float bufferPlay(unsigned char &bufferin, long length);
 
-  double bufferPlay(unsigned char &bufferin, double speed, long length);
+  float bufferPlay(unsigned char &bufferin, float speed, long length);
 
-  double bufferPlay(unsigned char &bufferin, double frequency, double start,
-                    double end);
+  float bufferPlay(unsigned char &bufferin, float frequency, float start,
+                    float end);
 
-  double bufferPlay4(unsigned char &bufferin, double frequency, double start,
-                     double end);
+  float bufferPlay4(unsigned char &bufferin, float frequency, float start,
+                     float end);
 
   bool save(const char* filename);
 
@@ -60,10 +60,10 @@ private:
   int myByteRate;
   short myBlockAlign;
   short myBitsPerSample;
-  double position, recordPosition;
-  double speed;
-  double output;
-  LagExp<double> loopRecordLag;
+  float position, recordPosition;
+  float speed;
+  float output;
+  LagExp<float> loopRecordLag;
   int myDataSize;
   short myChannels;
   int mySampleRate;

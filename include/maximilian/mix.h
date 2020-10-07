@@ -10,19 +10,18 @@ class Mix final : public Processor {
 public:
   Mix(Context &context);
 
-  double *stereo(double input, double two[2], double x);
-  double *quad(double input, double four[4], double x, double y);
-  double *ambisonic(double input, double eight[8], double x, double y,
-                    double z);
+  float *stereo(float input, float two[2], float x);
+  float *quad(float input, float four[4], float x, float y);
+  float *ambisonic(float input, float eight[8], float x, float y, float z);
 
 private:
-  double x;
-  double y;
-  double z;
-  double input;
-  double two[2];
-  double four[4];
-  double eight[8];
+  float x;
+  float y;
+  float z;
+  float input;
+  float two[2];
+  float four[4];
+  float eight[8];
 };
 
 } // namespace maximilian

@@ -36,7 +36,7 @@
 namespace maximilian {
 
 // This is a lookup table for converting midi to frequency
-const double mtofarray[129] = {0,
+const float mtofarray[129] = {0,
                                8.661957,
                                9.177024,
                                9.722718,
@@ -166,7 +166,7 @@ const double mtofarray[129] = {0,
                                12543.853516,
                                13289.75};
 
-double mtof(int midinote) {
+float mtof(int midinote) {
 
   if (midinote < 0)
     return 0;
