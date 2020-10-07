@@ -15,7 +15,7 @@ float Delayline::process(float input, int size, float feedback) {
   }
 
   output = memory[phase];
-  memory[phase] = (memory[phase] * feedback) + (input * feedback) * 0.5;
+  memory[phase] = (memory[phase] * feedback) + (input * feedback) * 0.5f;
   phase += 1;
 
   return output;

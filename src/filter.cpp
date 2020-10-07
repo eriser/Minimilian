@@ -4,7 +4,7 @@
 namespace maximilian {
 
 Filter::Filter(Context &context)
-    : Processor(context), x(0.0), y(0.0), z(0.0), c(0.0){};
+    : Processor(context), x(0.0f), y(0.0f), z(0.0f), c(0.0f){};
 
 // I particularly like these. cutoff between 0 and 1
 float Filter::lopass(float input, float cutoff) {
@@ -37,7 +37,7 @@ float Filter::lores(float input, float cutoff1, float resonance) {
   z = cos(TWOPI * cutoff / sampleRate);
   c = 2 - 2 * z;
 
-  auto r = (sqrt(2.0) * sqrt(-pow((z - 1.0), 3.0)) + resonance * (z - 1)) /
+  auto r = (std::sqrt(2.0f) * std::sqrt(-pow((z - 1.0f), 3.0f)) + resonance * (z - 1)) /
            (resonance * (z - 1));
 
   x = x + (input - y) * c;
@@ -63,10 +63,10 @@ float Filter::hires(float input, float cutoff1, float resonance) {
   if (resonance < 1.)
     resonance = 1.;
 
-  z = cos(TWOPI * cutoff / sampleRate);
+  z = std::cos(TWOPI * cutoff / sampleRate);
   c = 2 - 2 * z;
 
-  auto r = (sqrt(2.0) * sqrt(-pow((z - 1.0), 3.0)) + resonance * (z - 1)) /
+  auto r = (std::sqrt(2.0f) * std::sqrt(-pow((z - 1.0f), 3.0f)) + resonance * (z - 1)) /
            (resonance * (z - 1));
 
   x = x + (input - y) * c;
@@ -83,18 +83,18 @@ float Filter::bandpass(float input, float cutoff1, float resonance) {
 
   cutoff = cutoff1;
 
-  if (cutoff > (sampleRate * 0.5))
-    cutoff = (sampleRate * 0.5);
+  if (cutoff > (sampleRate * 0.5f))
+    cutoff = (sampleRate * 0.5f);
 
   if (resonance >= 1.)
-    resonance = 0.999999;
+    resonance = 0.999999f;
 
-  z = cos(TWOPI * cutoff / sampleRate);
+  z = std::cos(TWOPI * cutoff / sampleRate);
 
   inputs[0] = (1 - resonance) *
-              (sqrt(resonance * (resonance - 4.0 * pow(z, 2.0) + 2.0) + 1));
+              (std::sqrt(resonance * (resonance - 4.0 * std::pow(z, 2.0f) + 2.0f) + 1));
   inputs[1] = 2 * z * resonance;
-  inputs[2] = pow((resonance * -1), 2);
+  inputs[2] = std::pow((resonance * -1), 2);
 
   output = inputs[0] * input + inputs[1] * outputs[1] + inputs[2] * outputs[2];
   outputs[2] = outputs[1];

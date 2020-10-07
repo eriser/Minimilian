@@ -19,7 +19,7 @@ float Dynamic::gate(float input, float threshold, long holdtime,
     releasephase = 0;
     attackphase = 1;
     if (amplitude == 0)
-      amplitude = 0.01;
+      amplitude = 0.01f;
   }
 
   if (attackphase == 1 && amplitude < 1) {
@@ -69,14 +69,14 @@ float Dynamic::compressor(float input, float ratio, float threshold,
     releasephase = 1;
   }
 
-  if (releasephase == 1 && currentRatio > 0.) {
+  if (releasephase == 1 && currentRatio > 0.f) {
     currentRatio *= release;
   }
 
   if (input > 0.) {
-    output = input / (1. + currentRatio);
+    output = input / (1.f + currentRatio);
   } else {
-    output = input / (1. + currentRatio);
+    output = input / (1.f + currentRatio);
   }
 
   return output * (1 + log(ratio));

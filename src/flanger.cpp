@@ -17,7 +17,7 @@ float Flanger::process(float input, unsigned int delay,
   auto output = dl.process(input, delay + (lfoVal * depth * delay) + 1, feedback);
   auto normalise = (1 - std::fabs(output));
   output *= normalise;
-  return (output + input) * 0.5;
+  return (output + input) * 0.5f;
 }
 
 } // namespace maximilian

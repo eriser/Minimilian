@@ -10,13 +10,13 @@ float Envelope::line(int numberofsegments, float segments[1000]) {
   // less anything.
   // However, it's not that intuitive.
   if (isPlaying == 1) { // only make a sound once you've been triggered
-    period = 4. / (segments[valindex + 1] * 0.0044);
+    period = 4. / (segments[valindex + 1] * 0.0044f);
     nextval = segments[valindex + 2];
     currentval = segments[valindex];
-    if (currentval - amplitude > 0.0000001 && valindex < numberofsegments) {
+    if (currentval - amplitude > 0.0000001f && valindex < numberofsegments) {
       amplitude +=
           ((currentval - startval) / (context.sampleRate / period));
-    } else if (currentval - amplitude < -0.0000001 &&
+    } else if (currentval - amplitude < -0.0000001f &&
                valindex < numberofsegments) {
       amplitude -= (((currentval - startval) * (-1)) /
                     (context.sampleRate / period));

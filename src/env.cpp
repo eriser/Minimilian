@@ -41,7 +41,7 @@ float Env::ar(float input, float attack, float release, long holdtime,
     releasephase = 1;
   }
 
-  if (releasephase == 1 && amplitude > 0.) {
+  if (releasephase == 1 && amplitude > 0.f) {
     output = input * (amplitude *= release);
   }
 
@@ -94,7 +94,7 @@ float Env::adsr(float input, float attack, float decay, float sustain,
     releasephase = 1;
   }
 
-  if (releasephase == 1 && amplitude > 0.) {
+  if (releasephase == 1 && amplitude > 0.f) {
     output = input * (amplitude *= release);
   }
 

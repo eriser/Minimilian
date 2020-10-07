@@ -331,37 +331,38 @@ float Oscillator::phasor(float frequency) {
   // This produces a floating point linear ramp between 0 and 1 at the desired
   // frequency
   output = phase;
-  if (phase >= 1.0)
-    phase -= 1.0;
+  if (phase >= 1.0f)
+    phase -= 1.0f;
   phase += (1. / (context.sampleRate / frequency));
   return (output);
 }
 
 float Oscillator::square(float frequency) {
   // This is a square wave
-  if (phase < 0.5)
+  if (phase < 0.5f)
     output = -1;
-  if (phase > 0.5)
+  if (phase > 0.5f)
     output = 1;
-  if (phase >= 1.0)
-    phase -= 1.0;
+  if (phase >= 1.0f)
+    phase -= 1.0f;
   phase += (1. / (context.sampleRate / frequency));
   return (output);
 }
 
 float Oscillator::pulse(float frequency, float duty) {
   // This is a pulse generator that creates a signal between -1 and 1.
-  if (duty < 0.)
+  if (duty < 0.f)
     duty = 0;
-  if (duty > 1.)
+  if (duty > 1.f)
     duty = 1;
-  if (phase >= 1.0)
-    phase -= 1.0;
-  phase += (1. / (context.sampleRate / frequency));
+  if (phase >= 1.0f)
+    phase -= 1.0f;
+  phase += (1.f / (context.sampleRate / frequency));
   if (phase < duty)
-    output = -1.;
+    output = -1.f;
   if (phase > duty)
-    output = 1.;
+    output = 1.f;
+
   return (output);
 }
 
@@ -382,27 +383,27 @@ float Oscillator::phasor(float frequency, float startphase,
 float Oscillator::saw(float frequency) {
   // Sawtooth generator. This is like a phasor but goes between -1 and 1
   output = phase;
-  if (phase >= 1.0)
-    phase -= 2.0;
-  phase += (1. / (context.sampleRate / frequency));
+  if (phase >= 1.0f)
+    phase -= 2.0f;
+  phase += (1.f / (context.sampleRate / frequency));
   return (output);
 }
 
 float Oscillator::sawn(float frequency) {
   // Bandlimited sawtooth generator. Woohoo.
-  if (phase >= 0.5)
-    phase -= 1.0;
-  phase += (1. / (context.sampleRate / frequency));
-  float temp = (8820.22 / frequency) * phase;
-  if (temp < -0.5) {
-    temp = -0.5;
+  if (phase >= 0.5f)
+    phase -= 1.0f;
+  phase += (1.f / (context.sampleRate / frequency));
+  auto temp = (8820.22f / frequency) * phase;
+  if (temp < -0.5f) {
+    temp = -0.5f;
   }
-  if (temp > 0.5) {
-    temp = 0.5;
+  if (temp > 0.5f) {
+    temp = 0.5f;
   }
   temp *= 1000.0f;
   temp += 500.0f;
-  float remainder = temp - floor(temp);
+  auto remainder = temp - floor(temp);
   output = (float)((1.0f - remainder) * transition[(long)temp] +
                     remainder * transition[1 + (long)temp]) -
            phase;
@@ -413,13 +414,13 @@ float Oscillator::rect(float frequency, float duty) { return (output); }
 
 float Oscillator::triangle(float frequency) {
   // This is a triangle wave.
-  if (phase >= 1.0)
-    phase -= 1.0;
-  phase += (1. / (context.sampleRate / frequency));
-  if (phase <= 0.5) {
-    output = (phase - 0.25) * 4;
+  if (phase >= 1.0f)
+    phase -= 1.0f;
+  phase += (1.f / (context.sampleRate / frequency));
+  if (phase <= 0.5f) {
+    output = (phase - 0.25f) * 4;
   } else {
-    output = ((1.0 - phase) - 0.25) * 4;
+    output = ((1.0f - phase) - 0.25f) * 4;
   }
   return (output);
 }

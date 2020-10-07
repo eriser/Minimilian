@@ -1,5 +1,5 @@
-#include <cmath>
 #include "chorus.h"
+#include <cmath>
 
 namespace maximilian {
 
@@ -11,14 +11,15 @@ Chorus::Chorus(Context &context)
 // feedback = 0 - 1
 // speed = lfo speed in Hz, 0.0001 - 10 sounds good
 // depth = 0 - 1
-float Chorus::process(float input, unsigned int delay,
-                      float feedback, float speed,
-                      float depth) {
-  auto lfoVal = lopass.lores(lfo.noise(), speed, 1.0) * 2.0;
-  auto output1 = dl.process(input, delay + (lfoVal * depth * delay) + 1, feedback);
+float Chorus::process(float input, unsigned int delay, float feedback,
+                      float speed, float depth) {
+
+  auto lfoVal = lopass.lores(lfo.noise(), speed, 1.0f) * 2.0f;
+  auto output1 =
+      dl.process(input, delay + (lfoVal * depth * delay) + 1, feedback);
   auto output2 =
-      dl2.process(input, (delay + (lfoVal * depth * delay * 1.02) + 1) * 0.98,
-                  feedback * 0.99);
+      dl2.process(input, (delay + (lfoVal * depth * delay * 1.02f) + 1) * 0.98f,
+                  feedback * 0.99f);
   output1 *= (1.0 - std::fabs(output1));
   output2 *= (1.0 - std::fabs(output2));
 
