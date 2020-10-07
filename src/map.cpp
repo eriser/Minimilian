@@ -26,7 +26,7 @@ double explin(double val, double inMin, double inMax, double outMin,
          outMin;
 }
 
-int clamp(int v, const int low, const int high) {
+int clamp(int v, int low, int high) {
   v = std::min(high, v);
   v = std::max(low, v);
   return v;

@@ -29,8 +29,8 @@ public:
   // read an ogg file into this class using stb_vorbis
   bool readOgg();
 
-  void loopRecord(double newSample, const bool recordEnabled,
-                  const double recordMix);
+  void loopRecord(double newSample, bool recordEnabled,
+                  double recordMix);
 
   void clear();
 

@@ -47,7 +47,7 @@ extern "C" {
 namespace maximilian {
 
 // This is a lookup table for converting midi to frequency
-double mtofarray[129] = {0,
+const double mtofarray[129] = {0,
                          8.661957,
                          9.177024,
                          9.722718,
@@ -178,9 +178,6 @@ double mtofarray[129] = {0,
                          13289.75};
 
 
-
 double mtof(int midinote) { return mtofarray[midinote]; }
-
-
 
 } // namespace maximilian

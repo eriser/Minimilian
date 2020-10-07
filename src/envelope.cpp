@@ -31,7 +31,8 @@ double Envelope::line(int numberofsegments, double segments[1000]) {
   } else {
     output = 0;
   }
-  return (output);
+
+  return output;
 }
 
 // and this

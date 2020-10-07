@@ -7,11 +7,11 @@ namespace Distortion {
 
 double fastatan(double x) { return (x / (1.0 + 0.28 * (x * x))); }
 
-double atanDist(const double in, const double shape) {
+double atanDist(double in, double shape) {
   return (1.0 / std::atan(shape)) * std::atan(in * shape);
 }
 
-double fastAtanDist(const double in, const double shape) {
+double fastAtanDist(double in, double shape) {
   return (1.0 / fastatan(shape)) * fastatan(in * shape);
 }
 } // namespace Distortion

@@ -5,7 +5,7 @@ namespace maximilian {
 
 namespace Distortion {
 double fastatan(double x);
-double atanDist(const double in, const double shape);
-double fastAtanDist(const double in, const double shape);
+double atanDist(double in, double shape);
+double fastAtanDist(double in, double shape);
 } // namespace Distortion
 } // namespace maximilian

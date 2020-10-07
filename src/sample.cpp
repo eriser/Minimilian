@@ -1,7 +1,7 @@
-#include <fstream>
-#include <sstream>
 #include "sample.h"
 #include "stb_vorbis.h"
+#include <fstream>
+#include <sstream>
 
 namespace maximilian {
 
@@ -12,11 +12,11 @@ bool Sample::load(std::string fileName, int channel) {
   return read();
 }
 
-void Sample::loopRecord(double newSample, const bool recordEnabled,
-                        const double recordMix) {
+void Sample::loopRecord(double newSample, bool recordEnabled,
+                        double recordMix) {
   loopRecordLag.addSample(recordEnabled);
   if (recordEnabled) {
-    double currentSample =
+    auto currentSample =
         ((short *)myData)[(unsigned long)recordPosition] / 32767.0;
     newSample = (recordMix * currentSample) + ((1.0 - recordMix) * newSample);
     newSample *= loopRecordLag.value();

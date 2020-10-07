@@ -4,7 +4,7 @@
 namespace maximilian {
 
 // this is a 514-point sinewave table that has many uses.
-double sineBuffer[514] = {
+const double sineBuffer[514] = {
     0,         0.012268,  0.024536,  0.036804,  0.049042,  0.06131,   0.073547,
     0.085785,  0.097992,  0.1102,    0.12241,   0.13455,   0.1467,    0.15884,
     0.17093,   0.18301,   0.19507,   0.20709,   0.21909,   0.23105,   0.24295,
@@ -81,7 +81,7 @@ double sineBuffer[514] = {
     -0.012268, 0,         0.012268};
 
 // This is a transition table that helps with bandlimited oscs.
-double transition[1001] = {
+const double transition[1001] = {
     -0.500003,   -0.500003,   -0.500023,   -0.500063,  -0.500121,  -0.500179,
     -0.500259,   -0.50036,    -0.500476,   -0.500591,  -0.500732,  -0.500893,
     -0.501066,   -0.501239,   -0.50144,    -0.501661,  -0.501891,  -0.502123,

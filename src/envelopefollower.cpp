@@ -21,10 +21,12 @@ void EnvelopeFollower::setRelease(double releaseMS) {
 
 inline double EnvelopeFollower::play(double input) {
   input = fabs(input);
+  
   if (input > env)
     env = attack * (env - input) + input;
   else
     env = release * (env - input) + input;
+
   return env;
 }
 

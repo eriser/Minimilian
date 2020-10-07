@@ -14,7 +14,7 @@ double linexp(double val, double inMin, double inMax, double outMin,
 double explin(double val, double inMin, double inMax, double outMin,
               double outMax);
 
-int clamp(int v, const int low, const int high);
+int clamp(int v, int low, int high);
 } // namespace Map
 
 } // namespace maximilian
