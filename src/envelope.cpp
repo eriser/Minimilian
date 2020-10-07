@@ -15,11 +15,11 @@ double Envelope::line(int numberofsegments, double segments[1000]) {
     currentval = segments[valindex];
     if (currentval - amplitude > 0.0000001 && valindex < numberofsegments) {
       amplitude +=
-          ((currentval - startval) / (context.settings.sampleRate / period));
+          ((currentval - startval) / (context.sampleRate / period));
     } else if (currentval - amplitude < -0.0000001 &&
                valindex < numberofsegments) {
       amplitude -= (((currentval - startval) * (-1)) /
-                    (context.settings.sampleRate / period));
+                    (context.sampleRate / period));
     } else if (valindex > numberofsegments - 1) {
       valindex = numberofsegments - 2;
     } else {

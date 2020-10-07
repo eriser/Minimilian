@@ -17,8 +17,6 @@ public:
 
   bool load(const char* fileName, int channel = 0);
 
-  bool loadOgg(const char* filename, int channel = 0);
-
   void trigger();
 
   void loopRecord(double newSample, bool recordEnabled,

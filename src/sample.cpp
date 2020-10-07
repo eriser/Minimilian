@@ -1,5 +1,4 @@
 #include "sample.h"
-#include "stb_vorbis.h"
 #include <fstream>
 #include <sstream>
 #include <string>
@@ -21,30 +20,6 @@ void Sample::loopRecord(double newSample, bool recordEnabled,
     recordPosition = 0;
 }
 
-// This is for OGG loading
-bool Sample::loadOgg(const char* fileName, int channel) {
-  bool result;
-  readChannel = channel;
-  int channelx;
-  myDataSize =
-      stb_vorbis_decode_filename((char*)fileName, &channelx, &temp);
-  result = myDataSize > 0;
-
-  myChannels = (short)channelx;
-  length = myDataSize;
-  mySampleRate = 44100;
-
-  if (myChannels > 1) {
-    int position = 0;
-    int channel = readChannel;
-    for (int i = channel; i < myDataSize * 2; i += myChannels) {
-      temp[position] = temp[i];
-      position++;
-    }
-  }
-  return result; // this should probably be something more descriptive
-}
-
 Sample::~Sample() {
   if (myData)
     free(myData);
@@ -55,7 +30,7 @@ Sample::~Sample() {
 Sample::Sample(Context &context)
     : Processor(context), myData(NULL), temp(NULL), position(0),
       recordPosition(0), myChannels(1),
-      mySampleRate(context.settings.sampleRate){};
+      mySampleRate(context.sampleRate){};
 
 // This sets the playback position to the start of a sample
 void Sample::trigger() { position = 0; }
@@ -169,7 +144,7 @@ double Sample::playOnce() {
 // Same as above but takes a speed value specified as a ratio, with 1.0 as
 // original speed
 double Sample::playOnce(double speed) {
-  position = position + (speed / (context.settings.sampleRate / mySampleRate));
+  position = position + (speed / (context.sampleRate / mySampleRate));
   double remainder = position - (long)position;
   if ((long)position < length)
     output = (double)((1 - remainder) * temp[1 + (long)position] +
@@ -184,7 +159,7 @@ double Sample::playOnce(double speed) {
 double Sample::play(double speed) {
   double remainder;
   long a, b;
-  position = position + (speed / (context.settings.sampleRate / mySampleRate));
+  position = position + (speed / (context.sampleRate / mySampleRate));
   if (speed >= 0) {
 
     if ((long)position >= length - 1)
@@ -245,7 +220,7 @@ double Sample::play(double frequency, double start, double end, double &pos) {
 
     if (pos >= end)
       pos = start;
-    pos += ((end - start) / (context.settings.sampleRate / frequency));
+    pos += ((end - start) / (context.sampleRate / frequency));
     remainder = pos - floor(pos);
     long posl = floor(pos);
     if (posl + 1 < length) {
@@ -266,7 +241,7 @@ double Sample::play(double frequency, double start, double end, double &pos) {
     frequency *= -1.;
     if (pos <= start)
       pos = end;
-    pos -= ((end - start) / (context.settings.sampleRate / frequency));
+    pos -= ((end - start) / (context.sampleRate / frequency));
     remainder = pos - floor(pos);
     long posl = floor(pos);
     if (posl - 1 >= 0) {
@@ -297,7 +272,7 @@ double Sample::play4(double frequency, double start, double end) {
     }
     if (position >= end)
       position = start;
-    position += ((end - start) / (context.settings.sampleRate / frequency));
+    position += ((end - start) / (context.sampleRate / frequency));
     remainder = position - floor(position);
     if (position > 0) {
       a = temp[(int)(floor(position)) - 1];
@@ -330,7 +305,7 @@ double Sample::play4(double frequency, double start, double end) {
     frequency *= -1.;
     if (position <= start)
       position = end;
-    position -= ((end - start) / (context.settings.sampleRate / frequency));
+    position -= ((end - start) / (context.sampleRate / frequency));
     remainder = position - floor(position);
     if (position > start && position < end - 1) {
       a = temp[(long)position + 1];
@@ -381,7 +356,7 @@ double Sample::bufferPlay(unsigned char &bufferin, double speed, long length) {
   double remainder;
   long a, b;
   short *buffer = (short *)&bufferin;
-  position = position + (speed / (context.settings.sampleRate / mySampleRate));
+  position = position + (speed / (context.sampleRate / mySampleRate));
   if (speed >= 0) {
 
     if ((long)position >= length - 1)
@@ -435,7 +410,7 @@ double Sample::bufferPlay(unsigned char &bufferin, double frequency,
 
     if (position >= end)
       position = start;
-    position += ((end - start) / (context.settings.sampleRate / frequency));
+    position += ((end - start) / (context.sampleRate / frequency));
     remainder = position - floor(position);
     long pos = floor(position);
     if (pos + 1 < length) {
@@ -456,7 +431,7 @@ double Sample::bufferPlay(unsigned char &bufferin, double frequency,
     frequency *= -1.;
     if (position <= start)
       position = end;
-    position -= ((end - start) / (context.settings.sampleRate / frequency));
+    position -= ((end - start) / (context.sampleRate / frequency));
     remainder = position - floor(position);
     long pos = floor(position);
     if (pos - 1 >= 0) {
@@ -489,7 +464,7 @@ double Sample::bufferPlay4(unsigned char &bufferin, double frequency,
     }
     if (position >= end)
       position = start;
-    position += ((end - start) / (context.settings.sampleRate / frequency));
+    position += ((end - start) / (context.sampleRate / frequency));
     remainder = position - floor(position);
     if (position > 0) {
       a = buffer[(int)(floor(position)) - 1];
@@ -522,7 +497,7 @@ double Sample::bufferPlay4(unsigned char &bufferin, double frequency,
     frequency *= -1.;
     if (position <= start)
       position = end;
-    position -= ((end - start) / (context.settings.sampleRate / frequency));
+    position -= ((end - start) / (context.sampleRate / frequency));
     remainder = position - floor(position);
     if (position > start && position < end - 1) {
       a = buffer[(long)position + 1];

@@ -1,3 +1,0 @@
-[submodule "deps/github.com/kalven/stb_vorbis"]
-	path = deps/github.com/kalven/stb_vorbis
-	url = https://github.com/kalven/stb_vorbis

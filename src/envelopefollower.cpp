@@ -11,12 +11,12 @@ EnvelopeFollower::EnvelopeFollower(Context &context) : Processor(context) {
 
 void EnvelopeFollower::setAttack(double attackMS) {
   attack =
-      std::pow(0.01, 1.0 / (attackMS * context.settings.sampleRate * 0.001));
+      std::pow(0.01, 1.0 / (attackMS * context.sampleRate * 0.001));
 }
 
 void EnvelopeFollower::setRelease(double releaseMS) {
   release =
-      std::pow(0.01, 1.0 / (releaseMS * context.settings.sampleRate * 0.001));
+      std::pow(0.01, 1.0 / (releaseMS * context.sampleRate * 0.001));
 }
 
 double EnvelopeFollower::process(double input) {

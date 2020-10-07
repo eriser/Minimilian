@@ -22,7 +22,7 @@ double Filter::hipass(double input, double cutoff) {
 }
 // awesome. cuttof is freq in hz. res is between 1 and whatever. Watch out!
 double Filter::lores(double input, double cutoff1, double resonance) {
-  auto sampleRate = context.settings.sampleRate;
+  auto sampleRate = context.sampleRate;
 
   cutoff = cutoff1;
   if (cutoff < 10)
@@ -50,7 +50,7 @@ double Filter::lores(double input, double cutoff1, double resonance) {
 
 // working hires filter
 double Filter::hires(double input, double cutoff1, double resonance) {
-  auto sampleRate = context.settings.sampleRate;
+  auto sampleRate = context.sampleRate;
 
   cutoff = cutoff1;
 
@@ -79,7 +79,7 @@ double Filter::hires(double input, double cutoff1, double resonance) {
 
 // This works a bit. Needs attention.
 double Filter::bandpass(double input, double cutoff1, double resonance) {
-  auto sampleRate = context.settings.sampleRate;
+  auto sampleRate = context.sampleRate;
 
   cutoff = cutoff1;
 

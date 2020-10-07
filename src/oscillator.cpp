@@ -270,7 +270,7 @@ double Oscillator::sinewave(double frequency) {
   output = sin(phase * (TWOPI));
   if (phase >= 1.0)
     phase -= 1.0;
-  phase += (1. / (context.settings.sampleRate / (frequency)));
+  phase += (1. / (context.sampleRate / (frequency)));
   return (output);
 }
 
@@ -279,7 +279,7 @@ double Oscillator::sinebuf4(double frequency) {
   // point buffer
   double remainder;
   double a, b, c, d, a1, a2, a3;
-  phase += 512. / (context.settings.sampleRate / (frequency));
+  phase += 512. / (context.sampleRate / (frequency));
   if (phase >= 511)
     phase -= 512;
   remainder = phase - floor(phase);
@@ -309,7 +309,7 @@ double Oscillator::sinebuf(double frequency) { // specify the frequency of the
   // This is a sinewave oscillator that uses linear interpolation on a 514 point
   // buffer
   double remainder;
-  phase += 512. / (context.settings.sampleRate / (frequency));
+  phase += 512. / (context.sampleRate / (frequency));
   if (phase >= 511)
     phase -= 512;
   remainder = phase - floor(phase);
@@ -323,7 +323,7 @@ double Oscillator::coswave(double frequency) {
   output = cos(phase * (TWOPI));
   if (phase >= 1.0)
     phase -= 1.0;
-  phase += (1. / (context.settings.sampleRate / frequency));
+  phase += (1. / (context.sampleRate / frequency));
   return (output);
 }
 
@@ -333,7 +333,7 @@ double Oscillator::phasor(double frequency) {
   output = phase;
   if (phase >= 1.0)
     phase -= 1.0;
-  phase += (1. / (context.settings.sampleRate / frequency));
+  phase += (1. / (context.sampleRate / frequency));
   return (output);
 }
 
@@ -345,7 +345,7 @@ double Oscillator::square(double frequency) {
     output = 1;
   if (phase >= 1.0)
     phase -= 1.0;
-  phase += (1. / (context.settings.sampleRate / frequency));
+  phase += (1. / (context.sampleRate / frequency));
   return (output);
 }
 
@@ -357,7 +357,7 @@ double Oscillator::pulse(double frequency, double duty) {
     duty = 1;
   if (phase >= 1.0)
     phase -= 1.0;
-  phase += (1. / (context.settings.sampleRate / frequency));
+  phase += (1. / (context.sampleRate / frequency));
   if (phase < duty)
     output = -1.;
   if (phase > duty)
@@ -375,7 +375,7 @@ double Oscillator::phasor(double frequency, double startphase,
   if (phase >= endphase)
     phase = startphase;
   phase +=
-      ((endphase - startphase) / (context.settings.sampleRate / frequency));
+      ((endphase - startphase) / (context.sampleRate / frequency));
   return (output);
 }
 
@@ -384,7 +384,7 @@ double Oscillator::saw(double frequency) {
   output = phase;
   if (phase >= 1.0)
     phase -= 2.0;
-  phase += (1. / (context.settings.sampleRate / frequency));
+  phase += (1. / (context.sampleRate / frequency));
   return (output);
 }
 
@@ -392,7 +392,7 @@ double Oscillator::sawn(double frequency) {
   // Bandlimited sawtooth generator. Woohoo.
   if (phase >= 0.5)
     phase -= 1.0;
-  phase += (1. / (context.settings.sampleRate / frequency));
+  phase += (1. / (context.sampleRate / frequency));
   double temp = (8820.22 / frequency) * phase;
   if (temp < -0.5) {
     temp = -0.5;
@@ -415,7 +415,7 @@ double Oscillator::triangle(double frequency) {
   // This is a triangle wave.
   if (phase >= 1.0)
     phase -= 1.0;
-  phase += (1. / (context.settings.sampleRate / frequency));
+  phase += (1. / (context.sampleRate / frequency));
   if (phase <= 0.5) {
     output = (phase - 0.25) * 4;
   } else {

@@ -4,14 +4,10 @@ namespace maximilian {
 
 const double TWOPI = 6.283185307179586476925286766559;
 
-struct Settings final {
+struct Context final {
   int sampleRate = 44100;
   int channels = 2;
   int bufferSize = 1024;
-};
-
-struct Context final {
-  Settings settings;
 };
 
 struct Processor {
