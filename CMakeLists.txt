@@ -33,5 +33,3 @@ target_include_directories(maximilian PRIVATE
 
 set_target_properties(maximilian PROPERTIES CXX_STANDARD 17)
 
-add_subdirectory(bindings)
-
