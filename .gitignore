@@ -3,4 +3,5 @@
 *.mode2v3
 build
 .DS_Store
+.vscode
 
