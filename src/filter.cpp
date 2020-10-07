@@ -1,3 +1,4 @@
+#include <cmath>
 #include "filter.h"
 
 namespace maximilian {

@@ -1,4 +1,4 @@
-
+#include <cmath>
 #include "mix.h"
 
 namespace maximilian {
@@ -11,8 +11,8 @@ double *Mix::stereo(double input, double two[2], double x) {
     x = 1;
   if (x < 0)
     x = 0;
-  two[0] = input * sqrt(1.0 - x);
-  two[1] = input * sqrt(x);
+  two[0] = input * std::sqrt(1.0 - x);
+  two[1] = input * std::sqrt(x);
   return (two);
 }
 
@@ -26,10 +26,10 @@ double *Mix::quad(double input, double four[4], double x, double y) {
     y = 1;
   if (y < 0)
     y = 0;
-  four[0] = input * sqrt((1.0 - x) * y);
-  four[1] = input * sqrt((1.0 - x) * (1.0 - y));
-  four[2] = input * sqrt(x * y);
-  four[3] = input * sqrt(x * (1.0 - y));
+  four[0] = input * std::sqrt((1.0 - x) * y);
+  four[1] = input * std::sqrt((1.0 - x) * (1.0 - y));
+  four[2] = input * std::sqrt(x * y);
+  four[3] = input * std::sqrt(x * (1.0 - y));
   return (four);
 }
 
@@ -48,14 +48,14 @@ double *Mix::ambisonic(double input, double eight[8], double x, double y,
     y = 1;
   if (z < 0)
     y = 0;
-  eight[0] = input * (sqrt((1.0 - x) * y) * 1.0 - z);
-  eight[1] = input * (sqrt((1.0 - x) * (1.0 - y)) * 1.0 - z);
-  eight[2] = input * (sqrt(x * y) * 1.0 - z);
-  eight[3] = input * (sqrt(x * (1.0 - y)) * 1.0 - z);
-  eight[4] = input * (sqrt((1.0 - x) * y) * z);
-  eight[5] = input * (sqrt((1.0 - x) * (1.0 - y)) * z);
-  eight[6] = input * sqrt((x * y) * z);
-  eight[7] = input * sqrt((x * (1.0 - y)) * z);
+  eight[0] = input * (std::sqrt((1.0 - x) * y) * 1.0 - z);
+  eight[1] = input * (std::sqrt((1.0 - x) * (1.0 - y)) * 1.0 - z);
+  eight[2] = input * (std::sqrt(x * y) * 1.0 - z);
+  eight[3] = input * (std::sqrt(x * (1.0 - y)) * 1.0 - z);
+  eight[4] = input * (std::sqrt((1.0 - x) * y) * z);
+  eight[5] = input * (std::sqrt((1.0 - x) * (1.0 - y)) * z);
+  eight[6] = input * std::sqrt((x * y) * z);
+  eight[7] = input * std::sqrt((x * (1.0 - y)) * z);
   return (eight);
 }
 

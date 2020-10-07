@@ -1,11 +1,9 @@
 
 #pragma once
 
-#include <cmath>
-
 namespace maximilian {
 
-const double TWOPI = 4 * std::acos(0.0);
+const double TWOPI = 6.283185307179586476925286766559;
 
 struct Settings final {
   int sampleRate = 44100;

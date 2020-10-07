@@ -19,7 +19,7 @@ void EnvelopeFollower::setRelease(double releaseMS) {
       std::pow(0.01, 1.0 / (releaseMS * context.settings.sampleRate * 0.001));
 }
 
-inline double EnvelopeFollower::play(double input) {
+double EnvelopeFollower::play(double input) {
   input = fabs(input);
   
   if (input > env)

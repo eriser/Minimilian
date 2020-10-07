@@ -1,3 +1,4 @@
+#include <cmath>
 #include "dynamic.h"
 
 namespace maximilian {

@@ -1,3 +1,4 @@
+#include <cmath>
 #include "chorus.h"
 
 namespace maximilian {
@@ -18,8 +19,8 @@ double Chorus::chorus(double input, unsigned int delay,
   auto output2 =
       dl2.dl(input, (delay + (lfoVal * depth * delay * 1.02) + 1) * 0.98,
              feedback * 0.99);
-  output1 *= (1.0 - fabs(output1));
-  output2 *= (1.0 - fabs(output2));
+  output1 *= (1.0 - std::fabs(output1));
+  output2 *= (1.0 - std::fabs(output2));
 
   return (output1 + output2 + input) / 3.0;
 }

@@ -14,7 +14,7 @@ public:
   EnvelopeFollower(Context &context);
   void setAttack(double attackMS);
   void setRelease(double releaseMS);
-  inline double play(double input);
+  double play(double input);
   void reset();
 
 private:
