@@ -4,11 +4,8 @@
 
 namespace minimilian {
 
-class Env : public Processor {
-
-public:
+struct Env : public Processor {
   Env(Context &context);
-
   float ar(float input, float attack = 1, float release = 0.9,
            long holdtime = 1, int trigger = 0);
   float adsr(float input, float attack = 1, float decay = 0.99,
@@ -27,23 +24,54 @@ public:
   int attackphase, decayphase, sustainphase, holdphase, releasephase;
 };
 
-struct AR final : public Env {
-  AR(Context &context) : Env(context) {}
-
-  float process(float input, float attack = 1, float release = 0.9,
-                long holdtime = 1, int trigger = 0) {
-    return ar(input, attack, release, holdtime, trigger);
+struct AR final : public Processor {
+  inline AR(Context &context) : Processor(context), env(context) {}
+  inline void setAttack(float attack) { this->attack = attack; }
+  inline float getAttack() const { return attack; }
+  inline void setRelease(float release) { this->release = release; }
+  inline float getRelease() const { return release; }
+  inline void setHoldTime(long holdTime) { this->holdtime = holdTime; }
+  inline long getHoldTime() const { return holdtime; }
+  inline void setTrigger(int trigger) { this->trigger = trigger; }
+  inline int getTrigger() const { return trigger; }
+  inline float process(float input) {
+    return env.ar(input, attack, release, holdtime, trigger);
   }
+
+private:
+  float attack = 1;
+  float release = 0.9;
+  long holdtime = 1;
+  int trigger = 0;
+  Env env;
 };
 
-struct ADSR final : public Env {
-  ADSR(Context &context) : Env(context) {}
-
-  float process(float input, float attack = 1, float decay = 0.99,
-                float sustain = 0.125, float release = 0.9, long holdtime = 1,
-                int trigger = 0) {
-    return adsr(input, attack, decay, sustain, release, holdtime, trigger);
+struct ADSR final : public Processor {
+  inline ADSR(Context &context) : Processor(context), env(context) {}
+  inline void setAttack(float attack) { this->attack = attack; }
+  inline float getAttack() const { return attack; }
+  inline void setDecay(float decay) { this->decay = decay; }
+  inline float getDecay() const { return decay; }
+  inline void setSustain(float sustain) { this->sustain = sustain; }
+  inline float getSustain() const { return sustain; }
+  inline void setRelease(float release) { this->release = release; }
+  inline float getRelease() const { return release; }
+  inline void setHoldTime(long holdTime) { this->holdtime = holdTime; }
+  inline long getHoldTime() const { return holdtime; }
+  inline void setTrigger(int trigger) { this->trigger = trigger; }
+  inline int getTrigger() const { return trigger; }
+  inline float process(float input) {
+    return env.adsr(input, attack, decay, sustain, release, holdtime, trigger);
   }
+
+private:
+  float attack = 1;
+  float decay = 0.99f;
+  float sustain = 0.125f;
+  float release = 0.9f;
+  long holdtime = 1;
+  int trigger = 0;
+  Env env;
 };
 
 } // namespace minimilian
