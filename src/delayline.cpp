@@ -8,7 +8,7 @@ Delayline::Delayline(Context &context) : Processor(context) {
   memset(memory, 0, 88200 * sizeof(double));
 }
 
-double Delayline::dl(double input, int size, double feedback) {
+double Delayline::process(double input, int size, double feedback) {
   
   if (phase >= size) {
     phase = 0;
@@ -21,8 +21,9 @@ double Delayline::dl(double input, int size, double feedback) {
   return output;
 }
 
-double Delayline::dl(double input, int size, double feedback, int position) {
-  
+double Delayline::process(double input, int size, double feedback,
+                          int position) {
+
   if (phase >= size)
     phase = 0;
  

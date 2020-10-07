@@ -2,15 +2,9 @@
 #include "stb_vorbis.h"
 #include <fstream>
 #include <sstream>
+#include <string>
 
 namespace maximilian {
-
-// This is the maxiSample load function. It just calls read.
-bool Sample::load(std::string fileName, int channel) {
-  myPath = fileName;
-  readChannel = channel;
-  return read();
-}
 
 void Sample::loopRecord(double newSample, bool recordEnabled,
                         double recordMix) {
@@ -28,12 +22,12 @@ void Sample::loopRecord(double newSample, bool recordEnabled,
 }
 
 // This is for OGG loading
-bool Sample::loadOgg(std::string fileName, int channel) {
+bool Sample::loadOgg(const char* fileName, int channel) {
   bool result;
   readChannel = channel;
   int channelx;
-  myDataSize = stb_vorbis_decode_filename(const_cast<char *>(fileName.c_str()),
-                                          &channelx, &temp);
+  myDataSize =
+      stb_vorbis_decode_filename((char*)fileName, &channelx, &temp);
   result = myDataSize > 0;
 
   myChannels = (short)channelx;
@@ -56,7 +50,6 @@ Sample::~Sample() {
     free(myData);
   if (temp)
     free(temp);
-  printf("freeing SampleData");
 }
 
 Sample::Sample(Context &context)
@@ -68,9 +61,11 @@ Sample::Sample(Context &context)
 void Sample::trigger() { position = 0; }
 
 // This is the main read function.
-bool Sample::read() {
+bool Sample::load(const char *fileName, int channel) {
   bool result;
-  std::ifstream inFile(myPath.c_str(), std::ios::in | std::ios::binary);
+  readChannel = channel;
+
+  std::ifstream inFile(fileName, std::ios::in | std::ios::binary);
   result = inFile.is_open();
   if (inFile) {
     bool datafound = false;
@@ -580,10 +575,9 @@ void Sample::clear() { memset(myData, 0, myDataSize); }
 
 void Sample::reset() { position = 0; }
 
-bool Sample::save() { return save(myPath); }
 
-bool Sample::save(std::string filename) {
-  std::fstream myFile(filename.c_str(), std::ios::out | std::ios::binary);
+bool Sample::save(const char* filename) {
+  std::fstream myFile(filename, std::ios::out | std::ios::binary);
 
   // write the wav file per the wav file format
   myFile.seekp(0, std::ios::beg);
@@ -603,17 +597,6 @@ bool Sample::save(std::string filename) {
   myFile.write(myData, myDataSize);
 
   return true;
-}
-
-// return a printable summary of the wav file
-std::string Sample::getSummary() {
-  std::stringstream ss;
-  ss << "Format: " << myFormat << " Channels: " << myChannels
-     << " SampleRate: " << mySampleRate << " ByteRate: " << myByteRate
-     << " BlockAlign: " << myBlockAlign << " BitsPerSample: " << myBitsPerSample
-     << " DataSize: " << myDataSize;
-
-  return ss.str();
 }
 
 } // namespace maximilian

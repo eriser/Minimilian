@@ -10,11 +10,11 @@ Flanger::Flanger(Context &context)
 // feedback = 0 - 1
 // speed = lfo speed in Hz, 0.0001 - 10 sounds good
 // depth = 0 - 1
-double Flanger::flange(double input, unsigned int delay,
+double Flanger::process(double input, unsigned int delay,
                        double feedback, double speed,
                        double depth) {
   auto lfoVal = lfo.triangle(speed);
-  auto output = dl.dl(input, delay + (lfoVal * depth * delay) + 1, feedback);
+  auto output = dl.process(input, delay + (lfoVal * depth * delay) + 1, feedback);
   auto normalise = (1 - std::fabs(output));
   output *= normalise;
   return (output + input) * 0.5;

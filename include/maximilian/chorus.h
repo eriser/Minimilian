@@ -16,7 +16,7 @@ public:
   // feedback = 0 - 1
   // speed = lfo speed in Hz, 0.0001 - 10 sounds good
   // depth = 0 - 1
-  double chorus(double input, unsigned int delay,
+  double process(double input, unsigned int delay,
                 double feedback, double speed, double depth);
 
 private:

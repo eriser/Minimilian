@@ -9,8 +9,8 @@ class Delayline final : public Processor {
 
 public:
   Delayline(Context &context);
-  double dl(double input, int size, double feedback);
-  double dl(double input, int size, double feedback, int position);
+  double process(double input, int size, double feedback);
+  double process(double input, int size, double feedback, int position);
 
 private:
   double frequency;

@@ -1,8 +1,6 @@
 
 #pragma once
 
-#include <string>
-
 #include "core.h"
 #include "lagexp.h"
 
@@ -17,14 +15,11 @@ public:
   void getLength();
   void setLength(unsigned long numSamples);
 
-  bool load(std::string fileName, int channel = 0);
+  bool load(const char* fileName, int channel = 0);
 
-  bool loadOgg(std::string filename, int channel = 0);
+  bool loadOgg(const char* filename, int channel = 0);
 
   void trigger();
-
-  // read a wav file into this class
-  bool read();
 
   void loopRecord(double newSample, bool recordEnabled,
                   double recordMix);
@@ -57,15 +52,9 @@ public:
   double bufferPlay4(unsigned char &bufferin, double frequency, double start,
                      double end);
 
-  bool save();
-
-  bool save(std::string filename);
-
-  // return a printable summary of the wav file
-  std::string getSummary();
+  bool save(const char* filename);
 
 private:
-  std::string myPath;
   int myChunkSize;
   int mySubChunk1Size;
   int readChannel;

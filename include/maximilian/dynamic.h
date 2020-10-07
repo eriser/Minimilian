@@ -5,7 +5,7 @@
 
 namespace maximilian {
 
-class Dynamic final : public Processor {
+class Dynamic : public Processor {
 
 public:
   Dynamic(Context &context);
@@ -28,6 +28,24 @@ private:
   long holdtime;
   long holdcount;
   int attackphase, holdphase, releasephase;
+};
+
+struct Compressor final : public Dynamic {
+  Compressor(Context &context) : Dynamic(context) {}
+
+  double process(double input, double ratio, double threshold = 0.9,
+                 double attack = 1, double release = 0.9995) {
+    return compressor(input, ratio, threshold, attack, release);
+  }
+};
+
+struct Gate final : public Dynamic {
+  Gate(Context &context) : Dynamic(context) {}
+
+  double process(double input, double threshold = 0.9, long holdtime = 1,
+                 double attack = 1, double release = 0.9995) {
+    return gate(input, threshold, holdtime, attack, release);
+  }
 };
 
 } // namespace maximilian
