@@ -3,8 +3,6 @@
 
 namespace maximilian {
 
-namespace Distortion {
-
 double fastatan(double x) { return (x / (1.0 + 0.28 * (x * x))); }
 
 double atanDist(double in, double shape) {
@@ -14,6 +12,5 @@ double atanDist(double in, double shape) {
 double fastAtanDist(double in, double shape) {
   return (1.0 / fastatan(shape)) * fastatan(in * shape);
 }
-} // namespace Distortion
 
 } // namespace maximilian

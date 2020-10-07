@@ -9,7 +9,7 @@
 
 namespace maximilian {
 
-class EnvelopeFollower : public Processor {
+class EnvelopeFollower final : public Processor {
 public:
   EnvelopeFollower(Context &context);
   void setAttack(double attackMS);

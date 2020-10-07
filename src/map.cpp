@@ -3,9 +3,7 @@
 #include "map.h"
 
 namespace maximilian {
-
-namespace Map {
-
+  
 double linlin(double val, double inMin, double inMax, double outMin,
                      double outMax) {
   return ((val - inMin) / (inMax - inMin) * (outMax - outMin)) + outMin;
@@ -31,6 +29,5 @@ int clamp(int v, int low, int high) {
   v = std::max(low, v);
   return v;
 }
-}; // namespace Map
 
 } // namespace maximilian

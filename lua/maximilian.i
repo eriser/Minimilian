@@ -18,6 +18,8 @@
     #include "mix.h"
     #include "oscillator.h"
     #include "sample.h"
+    #include "map.h"
+    #include "distortion.h"
 %}
 
 %include "maximilian.h"
@@ -34,3 +36,5 @@
 %include "mix.h"
 %include "oscillator.h"
 %include "sample.h"
+%include "map.h"
+%include "distortion.h"

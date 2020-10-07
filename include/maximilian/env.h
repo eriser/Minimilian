@@ -5,7 +5,7 @@
 
 namespace maximilian {
 
-class Env : public Processor {
+class Env final : public Processor {
 
 public:
   Env(Context &context);

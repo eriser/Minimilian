@@ -45,3 +45,4 @@
 #include "mix.h"
 #include "oscillator.h"
 #include "sample.h"
+#include "map.h"
