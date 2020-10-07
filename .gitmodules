@@ -1,0 +1,6 @@
+[submodule "deps/github.com/kalven/stb_vorbis"]
+	path = deps/github.com/kalven/stb_vorbis
+	url = https://github.com/kalven/stb_vorbis
+[submodule "deps/github.com/thestk/rtaudio"]
+	path = deps/github.com/thestk/rtaudio
+	url = https://github.com/thestk/rtaudio
