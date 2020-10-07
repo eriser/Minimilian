@@ -1,5 +1,5 @@
 /*
- *  maximilian.h
+ *  minimilian.h
  *  platform independent synthesis library using portaudio or rtaudio
  *
  *  Created by Mick Grierson on 29/12/2009.

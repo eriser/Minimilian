@@ -1,15 +1,15 @@
+
 #pragma once
 
 #include "core.h"
 #include "delayline.h"
-#include "filter.h"
 #include "oscillator.h"
 
-namespace maximilian {
+namespace minimilian {
 
-class Chorus final : public Processor {
+class Flanger final : public Processor {
 public:
-  Chorus(Context &context);
+  Flanger(Context &context);
 
   // delay = delay time - ~800 sounds good
   // feedback = 0 - 1
@@ -19,9 +19,8 @@ public:
                 float depth);
 
 private:
-  Delayline dl, dl2;
+  Delayline dl;
   Oscillator lfo;
-  Filter lopass;
 };
 
-} // namespace maximilian
+} // namespace minimilian

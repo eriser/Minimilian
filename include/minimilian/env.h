@@ -2,7 +2,7 @@
 
 #include "core.h"
 
-namespace maximilian {
+namespace minimilian {
 
 class Env : public Processor {
 
@@ -46,4 +46,4 @@ struct ADSR final : public Env {
   }
 };
 
-} // namespace maximilian
+} // namespace minimilian

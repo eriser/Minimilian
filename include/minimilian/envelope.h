@@ -2,7 +2,7 @@
 
 #include "core.h"
 
-namespace maximilian {
+namespace minimilian {
 
 class Envelope final : public Processor {
 
@@ -22,4 +22,4 @@ private:
   float amplitude;
 };
 
-} // namespace maximilian
+} // namespace minimilian

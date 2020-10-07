@@ -1,7 +1,7 @@
 #include "distortion.h"
 #include <cmath>
 
-namespace maximilian {
+namespace minimilian {
 
 float fastatan(float x) { return (x / (1.0f + 0.28f * (x * x))); }
 
@@ -13,4 +13,4 @@ float fastAtanDist(float in, float shape) {
   return (1.0f / fastatan(shape)) * fastatan(in * shape);
 }
 
-} // namespace maximilian
+} // namespace minimilian

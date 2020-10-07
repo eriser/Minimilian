@@ -1,18 +1,22 @@
 #include "chorus.h"
 #include <cmath>
 
-namespace maximilian {
+namespace minimilian {
 
 Chorus::Chorus(Context &context)
-    : Processor(context), dl(context), dl2(context), lfo(context),
+    : Processor(context), lfo(context),
       lopass(context) {}
 
-// delay = delay time - ~800 sounds good
-// feedback = 0 - 1
-// speed = lfo speed in Hz, 0.0001 - 10 sounds good
-// depth = 0 - 1
-float Chorus::process(float input, unsigned int delay, float feedback,
-                      float speed, float depth) {
+void Chorus::setDelay(unsigned int delay) { this->delay = delay; }
+unsigned int Chorus::getDelay() const { return delay; }
+void Chorus::setFeedback(float feedback) { this->feedback = feedback; }
+float Chorus::getFeedback() const { return feedback; }
+void Chorus::setSpeed(float speed) { this->speed = speed; }
+float Chorus::getSpeed() const { return speed; }
+void Chorus::setDepth(float depth) { this->depth = depth; }
+float Chorus::getDepth() const { return depth; }
+
+float Chorus::process(float input) {
 
   auto lfoVal = lopass.lores(lfo.noise(), speed, 1.0f) * 2.0f;
   auto output1 =
@@ -26,4 +30,4 @@ float Chorus::process(float input, unsigned int delay, float feedback,
   return (output1 + output2 + input) / 3.0;
 }
 
-} // namespace maximilian
+} // namespace minimilian

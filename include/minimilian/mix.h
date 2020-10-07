@@ -3,7 +3,7 @@
 
 #include "core.h"
 
-namespace maximilian {
+namespace minimilian {
 
 class Mix final : public Processor {
 
@@ -24,4 +24,4 @@ private:
   float eight[8];
 };
 
-} // namespace maximilian
+} // namespace minimilian

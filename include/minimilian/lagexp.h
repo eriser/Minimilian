@@ -1,7 +1,7 @@
 
 #pragma once
 
-namespace maximilian {
+namespace minimilian {
 
 // lagging with an exponential moving average
 // a lower alpha value gives a slower lag
@@ -26,4 +26,4 @@ template <class T> struct LagExp final {
   inline T value() { return val; }
 };
 
-} // namespace maximilian
+} // namespace minimilian

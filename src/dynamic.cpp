@@ -1,7 +1,7 @@
 #include <cmath>
 #include "dynamic.h"
 
-namespace maximilian {
+namespace minimilian {
 
 /* OK this compressor and gate are now ready to use. The envelopes, like all the
  envelopes in this recent update, use stupid algorithms for incrementing -
@@ -82,4 +82,4 @@ float Dynamic::compressor(float input, float ratio, float threshold,
   return output * (1 + log(ratio));
 }
 
-} // namespace maximilian
+} // namespace minimilian

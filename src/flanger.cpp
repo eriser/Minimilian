@@ -1,10 +1,10 @@
 #include <cmath>
 #include "flanger.h"
 
-namespace maximilian {
+namespace minimilian {
 
 Flanger::Flanger(Context &context)
-    : Processor(context), dl(context), lfo(context) {}
+    : Processor(context), lfo(context) {}
 
 // delay = delay time - ~800 sounds good
 // feedback = 0 - 1
@@ -20,4 +20,4 @@ float Flanger::process(float input, unsigned int delay,
   return (output + input) * 0.5f;
 }
 
-} // namespace maximilian
+} // namespace minimilian

@@ -4,7 +4,7 @@
 #include "core.h"
 #include "lagexp.h"
 
-namespace maximilian {
+namespace minimilian {
 
 class Sample final : public Processor {
 
@@ -72,4 +72,4 @@ private:
   short *temp;
 };
 
-} // namespace maximilian
+} // namespace minimilian

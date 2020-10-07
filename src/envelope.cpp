@@ -1,7 +1,7 @@
 
 #include "envelope.h"
 
-namespace maximilian {
+namespace minimilian {
 
 Envelope::Envelope(Context &context) : Processor(context) {}
 
@@ -42,4 +42,4 @@ void Envelope::trigger(int index, float amp) {
   amplitude = amp;
 }
 
-} // namespace maximilian
+} // namespace minimilian

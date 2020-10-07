@@ -2,7 +2,7 @@
 #include <algorithm>
 #include "map.h"
 
-namespace maximilian {
+namespace minimilian {
   
 float linlin(float val, float inMin, float inMax, float outMin,
                      float outMax) {
@@ -30,4 +30,4 @@ int clamp(int v, int low, int high) {
   return v;
 }
 
-} // namespace maximilian
+} // namespace minimilian

@@ -3,7 +3,7 @@
 #include <sstream>
 #include <string>
 
-namespace maximilian {
+namespace minimilian {
 
 void Sample::loopRecord(float newSample, bool recordEnabled,
                         float recordMix) {
@@ -574,4 +574,4 @@ bool Sample::save(const char* filename) {
   return true;
 }
 
-} // namespace maximilian
+} // namespace minimilian

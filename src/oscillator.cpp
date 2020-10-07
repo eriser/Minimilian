@@ -1,7 +1,7 @@
 #include <cstdlib>
 #include "oscillator.h"
 
-namespace maximilian {
+namespace minimilian {
 
 // this is a 514-point sinewave table that has many uses.
 const float sineBuffer[514] = {
@@ -424,4 +424,4 @@ float Oscillator::triangle(float frequency) {
   }
   return (output);
 }
-} // namespace maximilian
+} // namespace minimilian

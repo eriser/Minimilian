@@ -3,7 +3,7 @@
 
 #include "core.h"
 
-namespace maximilian {
+namespace minimilian {
 
 class Oscillator : public Processor {
 
@@ -100,4 +100,4 @@ struct Rect : public Oscillator {
   }
 };
 
-} // namespace maximilian
+} // namespace minimilian

@@ -1,6 +1,6 @@
 #pragma once
 
-namespace maximilian {
+namespace minimilian {
 
 const float TWOPI = 6.283185307179586476925286766559;
 

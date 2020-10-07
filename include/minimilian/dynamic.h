@@ -2,7 +2,7 @@
 
 #include "core.h"
 
-namespace maximilian {
+namespace minimilian {
 
 class Dynamic : public Processor {
 
@@ -47,4 +47,4 @@ struct Gate final : public Dynamic {
   }
 };
 
-} // namespace maximilian
+} // namespace minimilian

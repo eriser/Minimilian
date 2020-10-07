@@ -1,7 +1,7 @@
 #include <cmath>
 #include "filter.h"
 
-namespace maximilian {
+namespace minimilian {
 
 Filter::Filter(Context &context)
     : Processor(context), x(0.0f), y(0.0f), z(0.0f), c(0.0f){};
@@ -103,4 +103,4 @@ float Filter::bandpass(float input, float cutoff1, float resonance) {
   return output;
 }
 
-} // namespace maximilian
+} // namespace minimilian

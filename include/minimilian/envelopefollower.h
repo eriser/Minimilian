@@ -5,7 +5,7 @@
 #include "filter.h"
 #include "oscillator.h"
 
-namespace maximilian {
+namespace minimilian {
 
 class EnvelopeFollower final : public Processor {
 public:
@@ -19,4 +19,4 @@ private:
   float attack, release, env;
 };
 
-} // namespace maximilian
+} // namespace minimilian

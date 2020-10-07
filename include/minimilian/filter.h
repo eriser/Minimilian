@@ -3,7 +3,7 @@
 
 #include "core.h"
 
-namespace maximilian {
+namespace minimilian {
 
 class Filter : public Processor {
 
@@ -61,4 +61,4 @@ struct HiPass : public Filter {
   float process(float input, float cutoff) { return hipass(input, cutoff); }
 };
 
-} // namespace maximilian
+} // namespace minimilian

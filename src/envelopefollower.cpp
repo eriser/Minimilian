@@ -1,7 +1,7 @@
 #include <cmath>
 #include "envelopefollower.h"
 
-namespace maximilian {
+namespace minimilian {
 
 EnvelopeFollower::EnvelopeFollower(Context &context) : Processor(context) {
   setAttack(100);
@@ -32,4 +32,4 @@ float EnvelopeFollower::process(float input) {
 
 void EnvelopeFollower::reset() { env = 0; }
 
-} // namespace maximilian
+} // namespace minimilian

@@ -1,6 +1,6 @@
 #include "env.h"
 
-namespace maximilian {
+namespace minimilian {
 
 Env::Env(Context &context) : Processor(context) {}
 
@@ -101,4 +101,4 @@ float Env::adsr(float input, float attack, float decay, float sustain,
   return output;
 }
 
-} // namespace maximilian
+} // namespace minimilian

@@ -1,7 +1,7 @@
 #include <cmath>
 #include "mix.h"
 
-namespace maximilian {
+namespace minimilian {
 
 Mix::Mix(Context &context) : Processor(context) {}
 
@@ -59,4 +59,4 @@ float *Mix::ambisonic(float input, float eight[8], float x, float y,
   return (eight);
 }
 
-} // namespace maximilian
+} // namespace minimilian

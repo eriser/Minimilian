@@ -1,6 +1,6 @@
 
 /*
- *  maximilian.cpp
+ *  minimilian.cpp
  *  platform independent synthesis library using portaudio or rtaudio
  *
  *  Created by Mick Grierson on 29/12/2009.
@@ -31,9 +31,9 @@
  *
  */
 
-#include "maximilian.h"
+#include "minimilian.h"
 
-namespace maximilian {
+namespace minimilian {
 
 // This is a lookup table for converting midi to frequency
 const float mtofarray[129] = {0,
@@ -177,4 +177,4 @@ float mtof(int midinote) {
   return mtofarray[midinote];
 }
 
-} // namespace maximilian
+} // namespace minimilian
