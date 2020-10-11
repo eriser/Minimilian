@@ -55,5 +55,4 @@ private:
   float amplitude;
 };
 
-
 } // namespace minimilian

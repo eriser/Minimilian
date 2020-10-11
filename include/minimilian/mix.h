@@ -39,8 +39,7 @@ public:
   }
 
   // ambisonic bus
-  float *ambisonic(float input, float eight[8], float x, float y,
-                        float z) {
+  float *ambisonic(float input, float eight[8], float x, float y, float z) {
     if (x > 1)
       x = 1;
     if (x < 0)
@@ -73,6 +72,5 @@ private:
   float four[4];
   float eight[8];
 };
-
 
 } // namespace minimilian

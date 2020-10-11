@@ -18,4 +18,4 @@ struct Processor {
 };
 
 float mtof(int midinote);
-}
+} // namespace minimilian

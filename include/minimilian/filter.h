@@ -159,5 +159,4 @@ struct HiPass : public Filter {
   float process(float input, float cutoff) { return hipass(input, cutoff); }
 };
 
-
 } // namespace minimilian

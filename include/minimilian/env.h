@@ -12,7 +12,7 @@ struct Env : public Processor {
    one. It takes mental numbers for attack and release tho. Basically, they're
    exponentials. I'll map them out later so that it's a bit more intuitive */
   float ar(float input, float attack, float release, long holdtime,
-                int trigger) {
+           int trigger) {
 
     if (trigger == 1 && attackphase != 1 && holdphase != 1) {
       holdcount = 0;
@@ -55,7 +55,7 @@ struct Env : public Processor {
   /* adsr. It's not bad, very simple to use*/
 
   float adsr(float input, float attack, float decay, float sustain,
-                  float release, long holdtime, int trigger) {
+             float release, long holdtime, int trigger) {
 
     if (trigger == 1 && attackphase != 1 && holdphase != 1 && decayphase != 1) {
       holdcount = 0;

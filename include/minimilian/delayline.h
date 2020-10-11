@@ -7,9 +7,7 @@ namespace minimilian {
 template <long maxSize> class DelaylineT final {
 
 public:
-  DelaylineT() {
-    memset(memory, 0, maxSize * sizeof(float));
-  }
+  DelaylineT() { memset(memory, 0, maxSize * sizeof(float)); }
 
   float process(float input, int size, float feedback) {
     if (phase >= size) {

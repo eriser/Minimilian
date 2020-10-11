@@ -32,8 +32,8 @@
 
 #pragma once
 
-#include "core.h"
 #include "chorus.h"
+#include "core.h"
 #include "delayline.h"
 #include "distortion.h"
 #include "dynamic.h"
@@ -42,7 +42,7 @@
 #include "filter.h"
 #include "flanger.h"
 #include "lagexp.h"
+#include "map.h"
 #include "mix.h"
 #include "oscillator.h"
 #include "sample.h"
-#include "map.h"

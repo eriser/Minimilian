@@ -40,5 +40,4 @@ private:
   float attack, release, env;
 };
 
-
 } // namespace minimilian

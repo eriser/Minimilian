@@ -15,12 +15,11 @@ public:
   void getLength();
   void setLength(unsigned long numSamples);
 
-  bool load(const char* fileName, int channel = 0);
+  bool load(const char *fileName, int channel = 0);
 
   void trigger();
 
-  void loopRecord(float newSample, bool recordEnabled,
-                  float recordMix);
+  void loopRecord(float newSample, bool recordEnabled, float recordMix);
 
   void clear();
 
@@ -45,12 +44,12 @@ public:
   float bufferPlay(unsigned char &bufferin, float speed, long length);
 
   float bufferPlay(unsigned char &bufferin, float frequency, float start,
-                    float end);
+                   float end);
 
   float bufferPlay4(unsigned char &bufferin, float frequency, float start,
-                     float end);
+                    float end);
 
-  bool save(const char* filename);
+  bool save(const char *filename);
 
 private:
   int myChunkSize;

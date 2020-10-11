@@ -15,8 +15,8 @@ public:
   // feedback = 0 - 1
   // speed = lfo speed in Hz, 0.0001 - 10 sounds good
   // depth = 0 - 1
-  float process(float input, unsigned int delay, float feedback,
-                         float speed, float depth) {
+  float process(float input, unsigned int delay, float feedback, float speed,
+                float depth) {
     auto lfoVal = lfo.triangle(speed);
     auto output =
         dl.process(input, delay + (lfoVal * depth * delay) + 1, feedback);
@@ -29,6 +29,5 @@ private:
   Delayline dl;
   Oscillator lfo;
 };
-
 
 } // namespace minimilian
