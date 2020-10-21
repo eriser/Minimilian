@@ -126,17 +126,14 @@ struct AR final : public Processor {
   inline float getRelease() const { return release; }
   inline void setHoldTime(long holdTime) { this->holdtime = holdTime; }
   inline long getHoldTime() const { return holdtime; }
-  inline void setTrigger(int trigger) { this->trigger = trigger; }
-  inline int getTrigger() const { return trigger; }
   inline float process(float input) {
-    return env.ar(input, attack, release, holdtime, trigger);
+    return env.ar(input, attack, release, holdtime, env.trigger);
   }
 
 private:
   float attack = 1;
   float release = 0.9;
   long holdtime = 1;
-  int trigger = 0;
   Env env;
 };
 
@@ -152,10 +149,9 @@ struct ADSR final : public Processor {
   inline float getRelease() const { return release; }
   inline void setHoldTime(long holdTime) { this->holdtime = holdTime; }
   inline long getHoldTime() const { return holdtime; }
-  inline void setTrigger(int trigger) { this->trigger = trigger; }
-  inline int getTrigger() const { return trigger; }
+
   inline float process(float input) {
-    return env.adsr(input, attack, decay, sustain, release, holdtime, trigger);
+    return env.adsr(input, attack, decay, sustain, release, holdtime, env.trigger);
   }
 
 private:
@@ -164,7 +160,6 @@ private:
   float sustain = 0.125f;
   float release = 0.9f;
   long holdtime = 1;
-  int trigger = 0;
   Env env;
 };
 

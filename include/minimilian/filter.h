@@ -63,8 +63,8 @@ public:
     if (cutoff < 10)
       cutoff = 10;
 
-    if (cutoff > (sampleRate))
-      cutoff = (sampleRate);
+    if (cutoff > sampleRate)
+      cutoff = sampleRate;
 
     if (resonance < 1.)
       resonance = 1.;
@@ -113,14 +113,20 @@ public:
     return output;
   }
 
-private:
+  float getCutoff() const { return cutoff; }
+  void setCutoff(float cut) { cutoff = cut; }
+
+  void setResonance(float res) { resonance = res; }
+  float getResonance() const { return resonance; }
+
+protected:
   float cutoff;
   float resonance;
   float gain;
   float input;
   float output;
-  float inputs[10];
-  float outputs[10];
+  float inputs[3];
+  float outputs[3];
   float cutoff1;
   float x; // speed
   float y; // pos
@@ -130,33 +136,33 @@ private:
 
 struct LowPassReso : public Filter {
   LowPassReso(Context &context) : Filter(context) {}
-  float process(float input, float cutoff, float resonance) {
+  float process(float input) {
     return lores(input, cutoff, resonance);
   }
 };
 
 struct HiPassReso : public Filter {
   HiPassReso(Context &context) : Filter(context) {}
-  float process(float input, float cutoff, float resonance) {
+  float process(float input) {
     return hires(input, cutoff, resonance);
   }
 };
 
 struct Bandpass : public Filter {
   Bandpass(Context &context) : Filter(context) {}
-  float process(float input, float cutoff, float resonance) {
+  float process(float input) {
     return bandpass(input, cutoff, resonance);
   }
 };
 
 struct LowPass : public Filter {
   LowPass(Context &context) : Filter(context) {}
-  float process(float input, float cutoff) { return lopass(input, cutoff); }
+  float process(float input) { return lopass(input, cutoff); }
 };
 
 struct HiPass : public Filter {
   HiPass(Context &context) : Filter(context) {}
-  float process(float input, float cutoff) { return hipass(input, cutoff); }
+  float process(float input) { return hipass(input, cutoff); }
 };
 
 } // namespace minimilian

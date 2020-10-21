@@ -1,13 +1,13 @@
 #pragma once
 
-#include <memory.h>
+#include <array>
 
 namespace minimilian {
 
 template <long maxSize> class DelaylineT final {
 
 public:
-  DelaylineT() { memset(memory, 0, maxSize * sizeof(float)); }
+  DelaylineT() { memory.fill(0); }
 
   float process(float input, int size, float feedback) {
     if (phase >= size) {
@@ -41,7 +41,7 @@ private:
   float startphase;
   float endphase;
   float output;
-  float memory[maxSize];
+  std::array<float, maxSize> memory;
 };
 
 using Delayline = DelaylineT<88200>;

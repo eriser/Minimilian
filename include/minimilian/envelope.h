@@ -1,6 +1,7 @@
 #pragma once
 
 #include "core.h"
+#include <vector>
 
 namespace minimilian {
 
@@ -9,7 +10,7 @@ class Envelope final : public Processor {
 public:
   Envelope(Context &context) : Processor(context) {}
 
-  float line(int numberofsegments, float segments[1000]) {
+  float line(int numberofsegments, const std::vector<double> &segments) {
     // This is a basic multi-segment ramp generator that you can use for more or
     // less anything.
     // However, it's not that intuitive.
@@ -43,6 +44,12 @@ public:
     valindex = index;
     amplitude = amp;
   }
+
+  void setValIndex(int index) { valindex = index; }
+  int getValIndex() const { return valindex; }
+
+  void setAmplitude(float amp) { amplitude = amp; }
+  float getAmplitude() const { return amplitude; }
 
 private:
   float period;
